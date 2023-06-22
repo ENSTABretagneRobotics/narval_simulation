@@ -82,4 +82,9 @@ cmake -DCMAKE_BUILD_TYPE=Release .. && make -j8
 ```
 If everything went well, you should see a front scan sonar simulation.
 
+### Install RTAC on your system
+
+You may install RTAC using the "make install" command. This will avoid
+downloading and compiling RTAC with each target / test you may want to compile.
+
 
