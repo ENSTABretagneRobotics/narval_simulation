@@ -4,7 +4,7 @@ function(FetchRTAC)
     cmake_parse_arguments(ARGUMENT "" "" "${multiValueArgs}" ${ARGN})
 
     if(NOT ARGUMENT_RTAC_DEFAULT_VERSION)
-        set(RTAC_DEFAULT_VERSION "v1.0")
+        set(RTAC_DEFAULT_VERSION "1.0")
     endif()
     set(RTAC_BASE_VERSION       ${RTAC_DEFAULT_VERSION})
     set(RTAC_DISPLAY_VERSION    ${RTAC_DEFAULT_VERSION})
@@ -34,6 +34,7 @@ function(FetchRTAC)
     include(FetchContent)
 
     find_package(Eigen 3.4 QUIET)
+
     # Getting Eigen 3.4 if no suitable version was found
     if(NOT TARGET Eigen3::Eigen)
         FetchContent_Declare(Eigen34
@@ -43,34 +44,38 @@ function(FetchRTAC)
         FetchContent_MakeAvailable(Eigen34)
     endif()
 
+    find_package(rtac_base ${RTAC_BASE_VERSION} QUIET)
     if(NOT TARGET rtac_base)
         FetchContent_Declare(rtac_base
             GIT_REPOSITORY https://github.com/ENSTABretagneRobotics/rtac_base.git
-            GIT_TAG        ${RTAC_BASE_VERSION}
+            GIT_TAG        v${RTAC_BASE_VERSION}
         )
         FetchContent_MakeAvailable(rtac_base)
     endif()
     
+    find_package(rtac_display ${RTAC_DISPLAY_VERSION} QUIET)
     if(NOT TARGET rtac_display)
         FetchContent_Declare(rtac_display
             GIT_REPOSITORY https://github.com/ENSTABretagneRobotics/rtac_display.git
-            GIT_TAG        ${RTAC_DISPLAY_VERSION}
+            GIT_TAG        v${RTAC_DISPLAY_VERSION}
         )
         FetchContent_MakeAvailable(rtac_display)
     endif()
     
+    find_package(rtac_optix ${RTAC_OPTIX_VERSION} QUIET)
     if(NOT TARGET rtac_optix)
         FetchContent_Declare(rtac_optix
             GIT_REPOSITORY https://github.com/ENSTABretagneRobotics/rtac_optix.git
-            GIT_TAG        ${RTAC_OPTIX_VERSION}
+            GIT_TAG        v${RTAC_OPTIX_VERSION}
         )
         FetchContent_MakeAvailable(rtac_optix)
     endif()
     
+    find_package(rtac_simulation ${RTAC_SIMULATION_VERSION} QUIET)
     if(NOT TARGET rtac_simulation)
         FetchContent_Declare(rtac_simulation
             GIT_REPOSITORY https://github.com/ENSTABretagneRobotics/rtac_simulation.git
-            GIT_TAG        ${RTAC_SIMULATION_VERSION}
+            GIT_TAG        v${RTAC_SIMULATION_VERSION}
         )
         FetchContent_MakeAvailable(rtac_simulation)
     endif()
